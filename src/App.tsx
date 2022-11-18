@@ -1,10 +1,11 @@
 import { FC } from 'react';
 import './App.css';
+import AppRouter from './components/AppRouter';
 
 const App: FC = () => {
   return (
     <div className="App">
-      hf,jnf
+      <AppRouter />
     </div>
   );
 }
