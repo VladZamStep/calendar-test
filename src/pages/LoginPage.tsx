@@ -1,8 +1,13 @@
+import { Layout, Row } from 'antd';
 import React, { FC } from 'react'
 
 const LoginPage: FC = () => {
     return (
-        <div>Login</div>
+        <Layout>
+            <Row justify='center' align='middle' className='h100'>
+                1234
+            </Row>
+        </Layout>
     )
 }
 
