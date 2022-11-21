@@ -9,7 +9,7 @@ export interface IRoute {
 
 export enum RouteNames {
     LOGIN_PAGE = '/login',
-    EVENT_PAGE = '/'
+    EVENT_PAGE = '/main'
 }
 
 export const publicRoutes: IRoute[] = [

@@ -1,18 +1,20 @@
 import { Layout, Row, Menu } from 'antd'
-import { Header } from 'antd/es/layout/layout'
-import React, { Dispatch, FC } from 'react'
-import { useDispatch } from 'react-redux'
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useActions } from '../hooks/useActions'
 import { useTypedSelector } from '../hooks/useTypedSelector'
 import { RouteNames } from '../routes'
-import { AppDispatch } from '../store'
-import { AuthActionCreators } from '../store/reducers/auth/action-creators'
 
 const NavBar: FC = () => {
 
     const navigate = useNavigate();
     const { isAuth, user } = useTypedSelector(state => state.auth);
-    const dispatch: Dispatch<any> = useDispatch();
+    const { logout } = useActions();
+
+    const handleLogout = () => {
+        logout();
+        navigate(RouteNames.LOGIN_PAGE);
+    }
 
     return (
         <Layout.Header>
@@ -30,9 +32,9 @@ const NavBar: FC = () => {
                         >
                             <Menu.Item
                                 key={1}
-                                onClick={() => dispatch(AuthActionCreators.logout())}
+                                onClick={handleLogout}
                             >
-                                Logout
+                                Выйти
                             </Menu.Item>
                         </Menu>
                     </>
@@ -46,13 +48,13 @@ const NavBar: FC = () => {
                             key={1}
                             onClick={() => navigate(RouteNames.LOGIN_PAGE)}
                         >
-                            Login
+                            Войти
                         </Menu.Item>
                     </Menu>
                 }
             </Row>
         </Layout.Header >
     )
-}
+};
 
-export default NavBar
+export default NavBar;
