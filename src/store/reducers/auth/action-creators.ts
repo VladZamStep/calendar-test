@@ -1,7 +1,7 @@
-import axios from "axios";
 import { AppDispatch } from "../../index";
 import { IUser } from "../../../models/IUser";
 import { AuthActionEnum, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUserAction } from "./types";
+import UserService from "../../../api/UserService";
 
 
 export const AuthActionCreators = {
@@ -14,13 +14,13 @@ export const AuthActionCreators = {
         try {
             dispatch(AuthActionCreators.setIsLoading(true));
             setTimeout(async () => {
-                const response = await axios.get<IUser[]>('./users.json');
+                const response = await UserService.getUsers();
                 const user = response.data.find(user => user.username === username && user.password === password);
                 if (user) {
                     localStorage.setItem('auth', 'true');
                     localStorage.setItem('user', user.username);
-                    dispatch(AuthActionCreators.setIsAuth(true));
                     dispatch(AuthActionCreators.setUser(user));
+                    dispatch(AuthActionCreators.setIsAuth(true));
                 }
                 else {
                     dispatch(AuthActionCreators.setError('Некорректное имя пользователя или пароль.'));
